@@ -1,6 +1,9 @@
 #ifndef SBC_COMPILER_H
 #define SBC_COMPILER_H
 
+#include <fstream>
+using std::fstream;
+
 #include <vector>
 using std::vector;
 
@@ -17,3 +20,5 @@ class sbcCompiler{
         sbcCompiler( const char* filename );
         ~sbcCompiler();
 };
+
+#endif //SBC_COMPILER_H
