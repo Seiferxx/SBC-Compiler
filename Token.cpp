@@ -32,3 +32,14 @@ void Token::setSymbol( const string& symbol ){
 void Token::setType( int type ){
     type_ = type;
 }
+
+const char* Token::getTypeString(){
+    const char* types[] = { "Identifier", "Int", "Float", "Char", "String literal", "+", "-", "*", "/", "%",
+                            ">", "<", "!", "&", "|", "=", "@", "++", "--", "->", ">=", "<=", "!=", "==", "{",
+                            "}", "(", ")", ";", "#", "[", "]" };
+    if( type_ >= 0 ){
+        return types[type_];
+    }
+    
+    return "error";
+}

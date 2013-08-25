@@ -34,6 +34,7 @@ class Token{
         int type() const;
         void setSymbol( const string& symbol );
         void setType( int type );
+        const char* getTypeString();
 };
 
 #endif //TOKEN_H

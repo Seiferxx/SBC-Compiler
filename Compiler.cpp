@@ -39,9 +39,11 @@ string& sbcCompiler::getLine( int index ){
 void sbcCompiler::compile(){
     Token* token = 0;
     
+    readFile();
+    
     token = lexAnalyzer -> getToken();
     while( token != 0 ){
-        cout << token -> symbol() << " " << token -> type() << endl;
+        cout << token -> symbol() << " " << token -> getTypeString() << endl;
         delete token;
         token = lexAnalyzer -> getToken();
     }
