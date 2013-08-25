@@ -10,9 +10,12 @@ using std::vector;
 #include <string>
 using std::string;
 
+class LexAnalyzer;
+
 class sbcCompiler{
     private:
         fstream srcFile;
+        LexAnalyzer* lexAnalyzer;
         vector<string> lines;
         int numLines_;
         
@@ -23,6 +26,7 @@ class sbcCompiler{
         ~sbcCompiler();
         int numLines() const;
         string& getLine( int index );
+        void compile();
 };
 
 #endif //SBC_COMPILER_H
