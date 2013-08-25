@@ -14,11 +14,15 @@ class sbcCompiler{
     private:
         fstream srcFile;
         vector<string> lines;
+        int numLines_;
         
         void readFile();
+        
     public:
         sbcCompiler( const char* filename );
         ~sbcCompiler();
+        int numLines() const;
+        string& getLine( int index );
 };
 
 #endif //SBC_COMPILER_H
