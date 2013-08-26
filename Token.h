@@ -4,6 +4,8 @@
 #include <string>
 using std::string;
 
+#define TOKEN_TYPES 32
+
 class Token{
     private:
         string symbol_;
@@ -12,7 +14,7 @@ class Token{
     public:
         enum TokenType{
             IDENTIFIER = 0,
-            INTEGER, FLOAT, CHAR, STRING,
+            INT_C, FLOAT_C, CHAR_C, STRING_C,
             PLUS, MINUS, PROD, DIV, MOD,
             GREATER, LESSER,
             NOT, AND, OR,
@@ -35,6 +37,7 @@ class Token{
         void setSymbol( const string& symbol );
         void setType( int type );
         const char* getTypeString();
+        void checkIfKeyword();
 };
 
 #endif //TOKEN_H

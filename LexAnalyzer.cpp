@@ -56,6 +56,7 @@ Token* LexAnalyzer::getToken(){
     if( moreTokens ){
         symbol = getSymbol();
         token = new Token( symbol, getType( curState ) );
+        token -> checkIfKeyword();
     }
     
     return token;
@@ -302,16 +303,16 @@ int LexAnalyzer::getType( int state ){
         type = Token::IDENTIFIER;
         break;
     case 2:
-        type = Token::INTEGER;
+        type = Token::INT_C;
         break;
     case 4: case 7:
-        type = Token::FLOAT;
+        type = Token::FLOAT_C;
         break;
     case 10:
-        type = Token::CHAR;
+        type = Token::CHAR_C;
         break;
     case 15:
-        type = Token::STRING;
+        type = Token::STRING_C;
         break;
     case 16:
         type = Token::PLUS;
