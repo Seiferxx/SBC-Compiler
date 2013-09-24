@@ -1,0 +1,71 @@
+
+// Declaracion de variables.
+<decl_var> ::= <tipo> <identificador>
+
+<tipo> ::= int | long | char | float | <tipo_def>
+<tipo_def> ::= struct | union <identificador>
+
+// Declaracion de tipos.
+
+<decl_tipo> ::= ( struct | union ) <identificador> { <list_decl> }
+<list_decl> ::= <decl_var> | ( <decl_var> <list_decl> )
+
+// Alias
+
+<alias> ::= typedef <tipo> <identificador>
+
+// Bloques
+
+<bloque> ::= { <instruccion> }
+<instruccion> ::= <expresion_maxima> | <expresion_maxima> <instruccion> | <bloque> | <estr_control> | <estr_control> <instruccion>
+
+<estr_control> ::= <if> | <if_else> | <for> | <while>
+
+<if> ::= if '(' <operacion> ')' <bloque>
+
+<if-else> ::= if '(' <operacion> ')' <bloque> else <bloque>
+
+<while> ::= while '(' <operacion> ')' <bloque>
+
+<for> ::= for '(' <operacion> ; <operacion> ; <operacion> ) <bloque>
+
+<funcion> ::= ( <tipo> | void ) <identificador> '(' <params> ')' <bloque>
+
+<params> ::= void | <list_param>
+
+<list_param> ::= <decl_var> | <decl_var> , <list_param>
+
+// Precedencia de operadores
+
+++, --          //Izq
+()              //Izq Llamada a funcion
+[]              //Izq
+@               //Izq
++, -            //Der, Unarios
+!               //Der
+*, /, %         //Izq
++, -            //Izq
+<, <=, >, >=    //Izq
+==, !=,         //Izq
+&&              //Izq
+||              //Izq
+=               //Der
+
+// Operaciones
+
+<assign> ::= ( <identificador> = <assign> ) | <or>
+<or> ::= <and> { <or_op> <Or> }
+<and> ::= <eq> { <and_op> <And> }
+<eq> ::= <rel> { <eq_op> <eq> }
+<rel> ::= <sum> { <rel_op> <sum> }
+<sum> ::= <mult> { <sum_op> <sum> }
+<mult> ::= <not> { <mult_op> <mult> }
+<not> ::= ( !<not> ) | <sign>
+<sign> ::= ( <sum_op> < sign> ) | <at>
+<at> ::= <array> { @ <at> }
+<array> ::= <func> '[' <assign> ']'
+<func> ::= <post> '(' <args> ')'
+<post> ::= <value> <post_op>
+<value> ::= '(' <assign> ')' | <constant> | <identificdor>
+
+<args> ::= <assign> { , <args> }
