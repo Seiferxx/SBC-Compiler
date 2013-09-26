@@ -2,12 +2,12 @@
 // Declaracion de variables.
 <decl_var> ::= <tipo> <identificador>
 
-<tipo> ::= int | long | char | float | <tipo_def>
+<tipo> ::= int | long | char | float | bool | <tipo_def>
 <tipo_def> ::= struct | union <identificador>
 
 // Declaracion de tipos.
 
-<decl_tipo> ::= ( struct | union ) <identificador> { <list_decl> }
+<decl_tipo> ::= ( struct | union ) <identificador> '{' <list_decl> '}'
 <list_decl> ::= <decl_var> | ( <decl_var> <list_decl> )
 
 // Alias
@@ -17,7 +17,7 @@
 // Bloques
 
 <bloque> ::= { <instruccion> }
-<instruccion> ::= <expresion_maxima> | <expresion_maxima> <instruccion> | <bloque> | <estr_control> | <estr_control> <instruccion>
+<instruccion> ::= <elem_local> | <elem_local> <instruccion> | <bloque> | <estr_control> | <estr_control> <instruccion>
 
 <estr_control> ::= <if> | <if_else> | <for> | <while>
 
@@ -33,7 +33,7 @@
 
 <params> ::= void | <list_param>
 
-<list_param> ::= <decl_var> | <decl_var> , <list_param>
+<list_param> ::= <decl_var> { , <list_param> }
 
 // Precedencia de operadores
 
@@ -69,3 +69,30 @@
 <value> ::= '(' <assign> ')' | <constant> | <identificdor>
 
 <args> ::= <assign> { , <args> }
+
+<constant> ::= <int_c> | <float_c> | <char_c> | <true_k> | <false_k>
+
+
+Podemos tener dos ambitos principales, el ambito global y el ambito dentro de una funcion, el cual
+incluye a todos los ambitos internos (estructuras de control y bloques internos...)
+
+En el ambito global podemos tener:
+- Declaracion de estructuras / uniones. (struct|union)
+- Declaracion de aliases (typedef)
+- Posiblemente variables globales (No esta concreto todavia).
+- Definición de una funcion.
+
+Al definir una funcion, es obligatorio abrir un bloque, y dentro de las posibles instrucciones que
+podemos tener dentro de una funcion estan...
+- Declaracion de variables.
+- Una operacion.
+- Una estructura de control.
+- Un bloque.
+
+<global> ::= <elem_global> | <elem_global> <global>
+             
+<elem_global> ::= ( <declaracion_global> | <funcion> )
+
+<declaracion_global> ::= ( <decl_tipo> | <alias> ) ;
+
+<elem_local> ::= ( <assign> | <decl_var> ) ;
