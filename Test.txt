@@ -36,3 +36,13 @@ hola hola ++ -- 5*3=15; mi  22e55       **
 int float bool true false while typedef void union struct long long for
 else    if
 break char  return
+
+
+alfa
+beta
+gamma
+
+
+   right
+    +   +   +
+no

@@ -9,6 +9,10 @@ using std::isalpha;
 #include <algorithm>
 using std::binary_search;
 
+#include <iostream>
+using std::cout;
+using std::endl;
+
 #define ACCEPTED_LEN 25
 
 // Constructor method
@@ -38,6 +42,7 @@ Token* LexAnalyzer::getToken(){
     Token* token = 0;
     bool moreTokens = true;
     string symbol;
+    bool ok;
     
     if( line.empty() ){
         line = compiler.getLine( 0 );
@@ -45,7 +50,14 @@ Token* LexAnalyzer::getToken(){
         curChar_ = 0;
     }
     else if( curChar_ >= line.size() ){
-        if( not getNextLine() ){
+        ok = true;
+        while( curChar_ >= line.size() and ok ){
+            ok = getNextLine();
+        }
+        if( not ok ){
+            moreTokens = false;
+        }
+        else if( not findTokenStart() ){
             moreTokens = false;
         }
     }
