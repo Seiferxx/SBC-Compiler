@@ -46,3 +46,6 @@ gamma
    right
     +   +   +
 no
+
+
+    no  no  no,2,4+4,  no ++++;

@@ -1,3 +1,5 @@
+first: all
+
 all: Token.o LexAnalyzer.o Compiler.o main.o 
 	g++ main.o Token.o LexAnalyzer.o Compiler.o -o main   
 

@@ -38,7 +38,7 @@ void Token::setType( int type ){
 const char* Token::getTypeString(){
     const char* types[] = { "Identifier", "Int_c", "Float_c", "Char_c", "String literal", "+", "-", "*", "/", "%",
                             ">", "<", "!", "&", "|", "=", "@", "++", "--", "->", ">=", "<=", "!=", "==", "{",
-                            "}", "(", ")", ";", "#", "[", "]", "bool_k", "break_k", "char_k", "else_k",
+                            "}", "(", ")", ";", "#", "[", "]", ",", "bool_k", "break_k", "char_k", "else_k",
                             "false_k", "float_k", "for_k", "if_k", "int_k", "long_k", "return_k",
                             "struct_k", "true_k", "typedef_k", "union_k", "void_k", "while_k" };
     if( type_ >= 0 ){

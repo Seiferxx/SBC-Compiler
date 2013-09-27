@@ -89,14 +89,15 @@ bool LexAnalyzer::isEscSequence( char c ){
 // Checks if the given char is a valid token of lenght 1.
 bool LexAnalyzer::isSingleChar( char c ){
     return c == '{' or c == '}' or c == '(' or c == ')' or
-           c == ';' or c == '#' or c == '[' or c == ']';
+           c == ';' or c == '#' or c == '[' or c == ']' or
+           c == ',';
 }
 
 int LexAnalyzer::getSingleCharState( char c ){
-    char characters[] = {'{', '}', '(', ')', ';', '#', '[', ']' };
+    char characters[] = {'{', '}', '(', ')', ';', '#', '[', ']', ',' };
     int i;
     
-    for( i = 0; i < 8; i++ ){
+    for( i = 0; i < 9; i++ ){
         if( c == characters[i] ){
             return i;
         }
@@ -406,6 +407,9 @@ int LexAnalyzer::getType( int state ){
         break;
     case 42:
         type = Token::RIGHT_BRKT;
+        break;
+    case 43:
+        type = Token::COMMA;
         break;
     }
     

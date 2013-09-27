@@ -4,7 +4,7 @@
 #include <string>
 using std::string;
 
-#define TOKEN_TYPES 32
+#define TOKEN_TYPES 33
 
 class Token{
     private:
@@ -25,7 +25,8 @@ class Token{
             GREATER_EQ, LESSER_EQ, NOT_EQ, EQUALS,
             LEFT_CB, RIGHT_CB, LEFT_P, RIGHT_P,
             SEMI_COLON, HASH,
-            LEFT_BRKT, RIGHT_BRKT
+            LEFT_BRKT, RIGHT_BRKT,
+            COMMA
         };
     
         Token();
