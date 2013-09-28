@@ -15,6 +15,24 @@ class SyntaxAnalyzer{
         void type();
         void declarationList();
         void varDeclaration();
+        void params();
+        void paramList();
+        void block();
+        void instruction();
+        void control();
+        void assignment();
+        void logicOr();
+        void logicAnd();
+        void equals();
+        void relational();
+        void sum();
+        void mult();
+        void logicNot();
+        void sign();
+        void postfix();
+        void value();
+        void args();
+        void constant();
     
     public:
         explicit SyntaxAnalyzer( LexAnalyzer& l );
