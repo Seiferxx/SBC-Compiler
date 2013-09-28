@@ -26,7 +26,11 @@ class Token{
             LEFT_CB, RIGHT_CB, LEFT_P, RIGHT_P,
             SEMI_COLON, HASH,
             LEFT_BRKT, RIGHT_BRKT,
-            COMMA
+            COMMA,
+            BOOL_K, BREAK_K, CHAR_K, ELSE_K, FALSE_K,
+            FLOAT_K, FOR_K, IF_K, INT_K, LONG_K, RETURN_K,
+            STRUCT_K, TRUE_K, TYPEDEF_K, UNION_K, VOID_K,
+            WHILE_K
         };
     
         Token();

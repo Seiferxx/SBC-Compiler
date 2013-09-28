@@ -11,11 +11,13 @@ using std::vector;
 using std::string;
 
 class LexAnalyzer;
+class SyntaxAnalyzer;
 
 class sbcCompiler{
     private:
         fstream srcFile;
         LexAnalyzer* lexAnalyzer;
+        SyntaxAnalyzer* syntaxAnalyzer;
         vector<string> lines;
         int numLines_;
         

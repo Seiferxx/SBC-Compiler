@@ -1,5 +1,6 @@
 #include "Compiler.h"
 #include "LexAnalyzer.h"
+#include "SyntaxAnalyzer.h"
 #include "Token.h"
 
 #include <string>
@@ -15,6 +16,7 @@ sbcCompiler::sbcCompiler( const char* filename ) :
     
     srcFile.open( filename, fstream::in );
     lexAnalyzer = new LexAnalyzer( *this );
+    syntaxAnalyzer = new SyntaxAnalyzer( *lexAnalyzer );
 }
 
 // Destructor method.
@@ -23,6 +25,7 @@ sbcCompiler::~sbcCompiler(){
         srcFile.close();
     }
     delete lexAnalyzer;
+    delete syntaxAnalyzer;
 }
 
 // Gets number of lines in vector;
@@ -40,12 +43,12 @@ void sbcCompiler::compile(){
     Token* token = 0;
     
     readFile();
-    
-    token = lexAnalyzer -> getToken();
-    while( token != 0 ){
-        cout << token -> symbol() << " " << token -> getTypeString() << endl;
-        delete token;
-        token = lexAnalyzer -> getToken();
+    try{
+        syntaxAnalyzer -> analyze();
+    }
+    catch( const char* except ){
+        cout << except << " in line " << lexAnalyzer -> curLine() + 1
+             << ":" << lexAnalyzer -> curChar() + 1 << endl;
     }
 }
 

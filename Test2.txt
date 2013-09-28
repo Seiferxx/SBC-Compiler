@@ -1,0 +1,15 @@
+typedef int entero;
+
+    typedef char caracter;
+    
+typedef bool booleano;
+
+struct estructura{
+    int x;
+    int y;
+};
+
+union miUnion{ char c; int d;
+};
+
+typedef struct estructura miEstructura;
