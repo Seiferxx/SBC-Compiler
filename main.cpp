@@ -4,8 +4,11 @@
 
 using namespace std;
 
+#define LEX_TEST "Test.txt"
+#define SYNTAX_TEST "Test2.txt"
+
 int main(){
-    sbcCompiler compiler( "Test.txt" );
+    sbcCompiler compiler( SYNTAX_TEST );
     
     compiler.compile();
     

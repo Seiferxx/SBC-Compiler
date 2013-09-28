@@ -37,7 +37,9 @@ void SyntaxAnalyzer::consumeToken(){
         curToken = 0;
     }
     curToken = lexAnalyzer.getToken();
-    cout << curToken -> getTypeString() << endl;
+    if( curToken != 0 ){
+        cout << curToken -> getTypeString() << endl;
+    }
 }
 
 void SyntaxAnalyzer::check( int t ){

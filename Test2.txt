@@ -13,3 +13,7 @@ union miUnion{ char c; int d;
 };
 
 typedef struct estructura miEstructura;
+
+
+
+
