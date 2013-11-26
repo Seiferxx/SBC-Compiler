@@ -17,6 +17,7 @@ class SyntaxAnalyzer{
         void varDeclaration();
         void params();
         void paramList();
+        void fblock();
         void block();
         void instruction();
         void control();
