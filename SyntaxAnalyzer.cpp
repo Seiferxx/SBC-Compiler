@@ -158,7 +158,7 @@ void SyntaxAnalyzer::paramList(){
 
 void SyntaxAnalyzer::fblock(){
     check( Token::LEFT_CB );
-    while( curToken != 0 && curToken -> type() != Token::RETURN_K ){
+    while( curToken != 0 && curToken -> type() != Token::RETURN_K && correctSyntax_ ){
         instruction();
     }
     check( Token::RETURN_K );
@@ -169,7 +169,7 @@ void SyntaxAnalyzer::fblock(){
 
 void SyntaxAnalyzer::block(){
     check( Token::LEFT_CB );
-    while( curToken != 0 && curToken -> type() != Token::RIGHT_CB ){
+    while( curToken != 0 && curToken -> type() != Token::RIGHT_CB && correctSyntax_ ){
         instruction();
     }
     check( Token::RIGHT_CB );
@@ -244,7 +244,7 @@ void SyntaxAnalyzer::control(){
 
 void SyntaxAnalyzer::assignment(){
     logicOr();
-    while( curToken != 0 && curToken -> type() == Token::ASSIGN ){
+    while( curToken != 0 && curToken -> type() == Token::ASSIGN && correctSyntax_ ){
         consumeToken();
         assignment();
     }
@@ -252,7 +252,7 @@ void SyntaxAnalyzer::assignment(){
 
 void SyntaxAnalyzer::logicOr(){
     logicAnd();
-    while( curToken != 0 && curToken -> type() == Token::OR ){
+    while( curToken != 0 && curToken -> type() == Token::OR && correctSyntax_ ){
         consumeToken();
         logicOr();
     }
@@ -260,7 +260,7 @@ void SyntaxAnalyzer::logicOr(){
 
 void SyntaxAnalyzer::logicAnd(){
     equals();
-    while( curToken != 0 && curToken -> type() == Token::AND ){
+    while( curToken != 0 && curToken -> type() == Token::AND && correctSyntax_ ){
         consumeToken();
         logicAnd();
     }
@@ -268,7 +268,7 @@ void SyntaxAnalyzer::logicAnd(){
 
 void SyntaxAnalyzer::equals(){
     relational();
-    while( curToken != 0 && ( curToken -> type() == Token::EQUALS || curToken -> type() == Token::NOT_EQ ) ){
+    while( curToken != 0 && ( curToken -> type() == Token::EQUALS || curToken -> type() == Token::NOT_EQ ) && correctSyntax_ ){
         consumeToken();
         equals();
     }
@@ -277,7 +277,7 @@ void SyntaxAnalyzer::equals(){
 void SyntaxAnalyzer::relational(){
     sum();
     while( curToken != 0 && ( curToken -> type() == Token::GREATER || curToken -> type() == Token::LESSER ||
-           curToken -> type() == Token::GREATER_EQ || curToken -> type() == Token::LESSER_EQ ) ){
+           curToken -> type() == Token::GREATER_EQ || curToken -> type() == Token::LESSER_EQ ) && correctSyntax_ ){
         consumeToken();
         relational();
     }
@@ -285,7 +285,7 @@ void SyntaxAnalyzer::relational(){
 
 void SyntaxAnalyzer::sum(){
     mult();
-    while( curToken != 0 && ( curToken -> type() == Token::PLUS || curToken -> type() == Token::MINUS ) ){
+    while( curToken != 0 && ( curToken -> type() == Token::PLUS || curToken -> type() == Token::MINUS ) && correctSyntax_ ){
         consumeToken();
         sum();
     }
@@ -294,7 +294,7 @@ void SyntaxAnalyzer::sum(){
 void SyntaxAnalyzer::mult(){
     logicNot();    
     while( curToken != 0 && ( curToken -> type() == Token::PROD || curToken -> type() == Token::DIV ||
-           curToken -> type() == Token::MOD ) ){
+           curToken -> type() == Token::MOD ) && correctSyntax_ ){
         consumeToken();
         mult();
     }
@@ -361,7 +361,7 @@ void SyntaxAnalyzer::value(){
 
 void SyntaxAnalyzer::args(){
     assignment();
-    while( curToken != 0 && curToken -> type() == Token::COMMA ){
+    while( curToken != 0 && curToken -> type() == Token::COMMA && correctSyntax_ ){
         consumeToken();
         args();
     }
