@@ -41,10 +41,17 @@ string& sbcCompiler::getLine( int index ){
 // Main method. Compiles the source file.
 void sbcCompiler::compile(){
     Token* token = 0;
+    bool result;
     
     readFile();
     try{
-        syntaxAnalyzer -> analyze();
+        result = syntaxAnalyzer -> analyze();
+        if( result ){
+            cout << "Ok" << endl;
+        }
+        else{
+            cout << "Syntax error." << endl;
+        }
     }
     catch( const char* except ){
         cout << except << " in line " << lexAnalyzer -> curLine() + 1

@@ -45,9 +45,14 @@ Token* LexAnalyzer::getToken(){
     bool ok;
     
     if( line.empty() ){
-        line = compiler.getLine( 0 );
-        curLine_ = 0;
-        curChar_ = 0;
+        if( compiler.numLines() > 0 ){
+            line = compiler.getLine( 0 );
+            curLine_ = 0;
+            curChar_ = 0;
+        }
+        else{
+            moreTokens = false;
+        }
     }
     else if( curChar_ >= line.size() ){
         ok = true;
@@ -106,14 +111,20 @@ int LexAnalyzer::getSingleCharState( char c ){
 
 bool LexAnalyzer::getNextLine(){
     bool success = false;
+    int nLines = compiler.numLines();
     
-    if( curLine_ + 1 < compiler.numLines() ){
-        curLine_++;
+    curLine_++;
+    while( curLine_ < nLines && !success ){
         line = compiler.getLine( curLine_ );
-        curChar_ = 0;
-        success = true;
+        if( !line.empty() ){
+            success = true;
+        }
+        else{
+            curLine_++;
+        }
     }
-    
+    curChar_ = 0;
+
     return success;
 }
 
@@ -121,11 +132,13 @@ bool LexAnalyzer::getNextLine(){
 bool LexAnalyzer::findTokenStart(){
     bool goOn = true;
     
-    while( endOfToken( line.at( curChar_ ) ) and goOn ){
-        curChar_++;
-        if( curChar_ >= line.size() ){
-            if( not getNextLine() ){
-                goOn = false;
+    if( line.size() > 0 ){
+        while( goOn and endOfToken( line.at( curChar_ ) ) ){
+            curChar_++;
+            if( (unsigned)curChar_ >= line.size() ){
+                if( not getNextLine() ){
+                    goOn = false;
+                }
             }
         }
     }
@@ -158,7 +171,7 @@ string LexAnalyzer::getSymbol(){
         }
         
         if( error ){
-            while( not endOfToken( line[curChar_] ) and curChar_ < line.size() ){
+            while( (unsigned)curChar_ < line.size() and endOfToken( line[curChar_] ) ){
                 symbol.push_back( line[curChar_] );
                 curChar_++;
             }
@@ -299,7 +312,7 @@ bool LexAnalyzer::includeNextChar( int state ){
     int next;
     int include = false;
     
-    if( curChar_ + 1 < line.size() ){
+    if( (unsigned)curChar_ + 1 < line.size() ){
         next = nextState( curState, line[curChar_ + 1] );
         include = ( next >= 0 and not endOfToken( line[curChar_ + 1] ) );
     }
